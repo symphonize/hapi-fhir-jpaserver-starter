@@ -18,15 +18,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration;
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Import;
 
 @ServletComponentScan(basePackageClasses = {RestfulServer.class})
 @SpringBootApplication(exclude = {ElasticsearchRestClientAutoConfiguration.class, ThymeleafAutoConfiguration.class})
+@EnableDiscoveryClient
 @Import({
 	StarterCrR4Config.class,
 	StarterCrDstu3Config.class,
@@ -53,6 +56,9 @@ public class Application extends SpringBootServletInitializer {
 	@Autowired
 	AutowireCapableBeanFactory beanFactory;
 
+	@Autowired
+	private BaseUrlFilter baseUrlFilter;
+
 	@Bean
 	@Conditional(OnEitherVersion.class)
 	public ServletRegistrationBean hapiServletRegistration(RestfulServer restfulServer) {
@@ -65,4 +71,11 @@ public class Application extends SpringBootServletInitializer {
 		return servletRegistrationBean;
 	}
 
+	@Bean
+	public FilterRegistrationBean<BaseUrlFilter> baseUrlFilterRegistration() {
+		FilterRegistrationBean<BaseUrlFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(baseUrlFilter);
+		registrationBean.addUrlPatterns("/fhir/*");
+		return registrationBean;
+	}
 }
