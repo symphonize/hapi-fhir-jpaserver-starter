@@ -33,6 +33,8 @@ management:
       export:
         enabled: true
 spring:
+  application:
+    name: hapi-fhir
   main:
     allow-circular-references: true
   flyway:
