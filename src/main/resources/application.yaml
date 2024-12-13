@@ -42,9 +42,9 @@ spring:
     baselineOnMigrate: true
     fail-on-missing-locations: false
   datasource:
-    url: 'jdbc:postgresql://localhost:5432/hapi'
-    username: admin
-    password: admin
+    url: 'jdbc:postgresql://${PGSQL_HOST:localhost}:5432/hapi?stringtype=unspecified'
+    username: serality
+    password: letmein
     driverClassName: org.postgresql.Driver
 
     # database connection pool size
