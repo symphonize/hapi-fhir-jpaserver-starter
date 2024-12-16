@@ -17,7 +17,7 @@ import java.util.List;
 
 @Component
 public class BaseUrlFilter implements Filter {
-	private static final List<String> REQUIRED_HOST_SEGMENT = Arrays.asList("host.docker.internal", "localhost");
+	private static final List<String> REQUIRED_HOST_SEGMENT = Arrays.asList("host.docker.internal", "localhost", "SYMP-LT1121");
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {

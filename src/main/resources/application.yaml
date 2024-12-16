@@ -260,7 +260,7 @@ hapi:
     # A threshold of -1 means to load all results. Note that if the final threshold is a
     # number other than -1, the system will never prefetch more than the given number.
     search_prefetch_thresholds: 13,503,2003,-1
-
+    reuse_cached_search_results_millis: -1
     # comma-separated package names, will be @ComponentScan'ed by Spring to allow for creating custom Spring beans
     #custom-bean-packages:
     
@@ -278,7 +278,7 @@ hapi:
     #    bundle_batch_pool_size: 10
     #    bundle_batch_pool_max_size: 50
 
-    #    logger:
+#        logger:
     #      error_format: 'ERROR - ${requestVerb} ${requestUrl}'
     #      format: >-
     #        Path[${servletPath}] Source[${requestHeader.x-forwarded-for}]
@@ -290,7 +290,6 @@ hapi:
     #    max_binary_size: 104857600
     #    max_page_size: 200
     #    retain_cached_searches_mins: 60
-    #    reuse_cached_search_results_millis: 60000
     tester:
       home:
         name: Local Tester
